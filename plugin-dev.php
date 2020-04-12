@@ -30,6 +30,9 @@ final class Plugin_Development{
      */
     private function __construct(){
         $this->define_contstans();
+        register_activation_hook(__FILE__, [$this, 'activate']);
+    
+        add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
     /**
@@ -44,14 +47,37 @@ final class Plugin_Development{
         return $instance;
     }
 
+    /**
+     * Define the required plugin constants
+     * return void
+     */
     public function define_contstans(){
-        define('P_DEV_VERSION', self::version);
+        define('P_DEV_VERSION', $this->version);
         define('P_DEV_FILE', __FILE__);
         define('P_DEV_PATH', __DIR__);
         define('P_DEV_URL', plugins_url('', P_DEV_FILE));
         define('P_DEV_ASSETS', P_DEV_URL . '/assets');
     }
 
+    /**
+     * Initialize the plugin
+     * @return void
+     */
+    public function init_plugin(){
+
+    }
+
+    /**
+     * Do stuff upon pluging activation
+     * @return void
+     */
+    public function activate(){
+        $installed = get_option('p_dev_installed');
+        if(! $installed){
+            update_option('p_dev_installed', time());         
+        }
+        update_option('p_dev_version', P_DEV_VERSION);
+    }
 }
 
 /**
@@ -60,7 +86,7 @@ final class Plugin_Development{
 * @return \Plugin_Development
 */
 function plugin_development(){
-return plugin_development::init();
+    return plugin_development::init();
 }
 
 //var_dump("test"); die;

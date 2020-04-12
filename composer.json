@@ -1,0 +1,20 @@
+{
+  "name": "kuvic16/plugin-dev",
+  "description": "Learning wordpress plugin development",
+  "type": "wordpress-plugin",
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "Shaiful Islam",
+      "email": "kuvic16@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Plugin\\Dev\\": "includes/"
+    },
+    "files": []
+  }
+}
