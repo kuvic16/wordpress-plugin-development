@@ -15,6 +15,8 @@ if(!defined('ABSPATH')){
     exit;
 }
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 /**
  * THe main plugin class
 */
@@ -23,7 +25,7 @@ final class Plugin_Development{
     /**
      * plugin version
      */
-    private $version = '1.0';
+    const version = '1.0';
 
     /**
      * class constructor
@@ -52,7 +54,7 @@ final class Plugin_Development{
      * return void
      */
     public function define_contstans(){
-        define('P_DEV_VERSION', $this->version);
+        define('P_DEV_VERSION', self::version);
         define('P_DEV_FILE', __FILE__);
         define('P_DEV_PATH', __DIR__);
         define('P_DEV_URL', plugins_url('', P_DEV_FILE));
@@ -64,7 +66,11 @@ final class Plugin_Development{
      * @return void
      */
     public function init_plugin(){
-
+        if(is_admin()){
+            new Plugin\Dev\Admin();
+        }else{
+            new Plugin\Dev\Frontend();
+        }
     }
 
     /**
