@@ -13,6 +13,6 @@ class Admin{
 
     public function dispatch_actions(){
         $addressbook = new Admin\Addressbook();
-        add_action('admit_init', [$addressbook, 'form_handler']);
+        add_action('admin_init', [$addressbook, 'form_handler']);
     }
 }

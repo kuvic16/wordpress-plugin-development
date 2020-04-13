@@ -38,7 +38,7 @@
                 </tr>
             </tbody>
         </table>
-        <?php wp_nonce_field('new_address'); ?>
+        <?php wp_nonce_field('new-address'); ?>
         <?php submit_button(__('Add Address', 'plugin-dev'), 'primary', 'submit_address') ?>
     </form>
 </div>
