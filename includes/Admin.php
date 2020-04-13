@@ -7,6 +7,12 @@ namespace Plugin\Dev;
  */
 class Admin{
     function __construct(){
+        $this->dispatch_actions();
         new Admin\Menu();
+    }
+
+    public function dispatch_actions(){
+        $addressbook = new Admin\Addressbook();
+        add_action('admit_init', [$addressbook, 'form_handler']);
     }
 }

@@ -28,7 +28,7 @@ class Menu{
             __('Plugin Dev', 'plugin-dev'), 
             $capability, 
             $parent_slug, 
-            [$this, 'plugin_page'], 
+            [$this, 'addressbook_page'], 
             'dashicons-welcome-learn-more'
         );
 
@@ -37,8 +37,17 @@ class Menu{
             __('Address Book', 'plugin_dev'), 
             __('Address Book', 'plugin_dev'), 
             $capability, 
-            'plugin-dev-addressbook', 
+            $parent_slug,
             [$this, 'addressbook_page']
+        );
+
+        add_submenu_page(
+            $parent_slug, 
+            __('Settings', 'plugin_dev'), 
+            __('Settings', 'plugin_dev'), 
+            $capability, 
+            'plugin-dev-settings', 
+            [$this, 'settings_page']
         );
     }
 
@@ -47,8 +56,8 @@ class Menu{
      * 
      * @return void
      */
-    public function plugin_page(){
-        echo 'Hello World';
+    public function addressbook_page(){
+        (new Addressbook())->plugin_page();
     }
 
     /**
@@ -56,7 +65,7 @@ class Menu{
      * 
      * @return void
      */
-    public function addressbook_page(){
-        echo 'Addressbook page';
+    public function settings_page(){
+        echo 'Settings page';
     }
 }
