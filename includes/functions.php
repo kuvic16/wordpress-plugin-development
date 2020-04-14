@@ -46,3 +46,43 @@ function wd_pd_insert_address($args = []){
     }
     return $wpdb->insert_id;
 }
+
+/**
+ * Get address
+ * 
+ * @param array $args
+ * 
+ * @return array
+ * 
+ */
+function wd_pd_get_addresses($args = []){
+    global $wpdb;
+
+    $defaults = [
+        'number' => 20,
+        'offset' => 0,
+        'orderby' => 'id',
+        'order' => 'ASC'
+    ];
+
+    $args = wp_parse_args($args, $defaults);
+    $items = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT * from {$wpdb->prefix}pd_addresses
+            ORDER BY {$args['orderby']} {$args['order']}
+            LIMIT %d, %d",
+            $args['offset'], $args['number']
+        ));
+
+    return $items;    
+}
+
+/**
+ * Get the count of total address
+ * 
+ * @return int
+ */
+function wd_pd_address_count(){
+    global $wpdb;
+    return (int) $wpdb->get_var("SELECT count(id) from {$wpdb->prefox}pd_address");
+}
