@@ -78,11 +78,7 @@ final class Plugin_Development{
      * @return void
      */
     public function activate(){
-        $installed = get_option('p_dev_installed');
-        if(! $installed){
-            update_option('p_dev_installed', time());         
-        }
-        update_option('p_dev_version', P_DEV_VERSION);
+        (new Plugin\Dev\Installer())->run();
     }
 }
 

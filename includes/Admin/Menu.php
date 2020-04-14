@@ -6,11 +6,12 @@ namespace Plugin\Dev\Admin;
  * The menu handler class
  */
 class Menu{
-
+    protected $addressbook;
     /**
      * Initialize the menu class
      */
-    function __construct(){
+    function __construct($addressbook){
+        $this->addressbook = $addressbook;
         add_action('admin_menu', [$this, 'admin_menu']);
     }
 
@@ -28,7 +29,7 @@ class Menu{
             __('Plugin Dev', 'plugin-dev'), 
             $capability, 
             $parent_slug, 
-            [$this, 'addressbook_page'], 
+            [$this->addressbook, 'plugin_page'], 
             'dashicons-welcome-learn-more'
         );
 
@@ -38,7 +39,7 @@ class Menu{
             __('Address Book', 'plugin_dev'), 
             $capability, 
             $parent_slug,
-            [$this, 'addressbook_page']
+            [$this->addressbook, 'plugin_page']
         );
 
         add_submenu_page(
@@ -47,7 +48,7 @@ class Menu{
             __('Settings', 'plugin_dev'), 
             $capability, 
             'plugin-dev-settings', 
-            [$this, 'settings_page']
+            [$this->addressbook, 'settings_page']
         );
     }
 
@@ -57,7 +58,7 @@ class Menu{
      * @return void
      */
     public function addressbook_page(){
-        (new Addressbook())->plugin_page();
+        $this->addressbook->plugin_page();
     }
 
     /**
