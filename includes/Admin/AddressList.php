@@ -38,6 +38,11 @@ class AddressList extends \WP_List_Table{
         ];
     }
 
+    /**
+     * Get sortable columns
+     * 
+     * @return array
+     */
     public function get_sortable_columns(){
         $sortable_columns = [
             'name' => ['name', true],
@@ -46,7 +51,28 @@ class AddressList extends \WP_List_Table{
         return $sortable_columns;
     }
 
+    /**
+     * Set the bulk actions
+     *
+     * @return array
+     */
+    function get_bulk_actions() {
+        $actions = array(
+            'trash'  => __( 'Move to Trash', 'plugin-dev' ),
+        );
 
+        return $actions;
+    }
+
+
+    /**
+     * Default column values
+     * 
+     * @param object $item
+     * @param string $column_name
+     * 
+     * @return string
+     */
     protected function column_default($item, $column_name){
         switch($column_name){
             case 'value': 
@@ -57,6 +83,13 @@ class AddressList extends \WP_List_Table{
         }
     }
 
+    /**
+     * Render the "name" column
+     * 
+     * @param object $item
+     * 
+     * @return string
+     */
     public function column_name($item){
         $actions = [];
         $actions['edit'] = sprintf(
@@ -85,6 +118,13 @@ class AddressList extends \WP_List_Table{
         );
     }
 
+    /**
+     * Render the "cb" column
+     * 
+     * @param object $item
+     * 
+     * @return string
+     */
     protected function column_cb($item){
         return sprintf(
             '<input type="checkbox" name="address_id[]" value="%d"/>',
