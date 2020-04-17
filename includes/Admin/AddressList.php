@@ -68,7 +68,10 @@ class AddressList extends \WP_List_Table{
         );
         $actions['delete'] = sprintf(
             '<a href="%s" class="submitdelete" onclick="return confirm(\'Are you sure?\');" title="%s">%s</a>',
-            wp_nonce_url(admin_url('admin-post.php?page=plugin-dev&action=wd-pd-delete-address&id=' . $item->id)),
+            wp_nonce_url(
+                admin_url('admin-post.php?page=plugin-dev&action=wd-pd-delete-address&id=' . $item->id),
+                'wd-pd-delete-address'
+            ),
             // $item->id,
             __('Delete', 'plugin-dev'),
             __('Delete', 'plugin-dev')
