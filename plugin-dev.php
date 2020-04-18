@@ -66,6 +66,8 @@ final class Plugin_Development{
      * @return void
      */
     public function init_plugin(){
+        new Plugin\Dev\Assets();
+        
         if(is_admin()){
             new Plugin\Dev\Admin();
         }else{

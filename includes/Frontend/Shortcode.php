@@ -23,6 +23,8 @@ class Shortcode{
      * @return string
      */
     public function render_shortcode($atts, $content = ''){
-        return 'Hello from Shortcode';
+        wp_enqueue_script('plgun-dev-script');
+        wp_enqueue_style('plgun-dev-style');
+        return '<div class="pd-shortcode"> Hello from Shortcode</div>';
     }
 } 
