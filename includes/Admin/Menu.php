@@ -24,7 +24,7 @@ class Menu{
         $parent_slug = 'plugin-dev';
         $capability = 'manage_options';
 
-        add_menu_page(
+        $hook = add_menu_page(
             __('Plugin Dev', 'plugin-dev'), 
             __('Plugin Dev', 'plugin-dev'), 
             $capability, 
@@ -50,6 +50,18 @@ class Menu{
             'plugin-dev-settings', 
             [$this->addressbook, 'settings_page']
         );
+
+        // enqueue the admin assets (scripts + styles)
+        add_action('admin_head-' . $hook, [$this, 'enqueue_admin_assets']);
+    }
+
+    /**
+     * enqueue admin assets those are register into Plugin\Dev\Assets
+     * 
+     * @return void
+     */
+    public function enqueue_admin_assets(){
+        wp_enqueue_style('plugin-dev-admin-style');
     }
 
     /**

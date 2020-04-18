@@ -41,6 +41,10 @@ class Assets{
             'plugin-dev-style' => [
                 'src' => P_DEV_ASSETS . '/css/frontend.css',
                 'version' => filemtime(P_DEV_PATH . '/assets/css/frontend.css')
+            ],
+            'plugin-dev-admin-style' => [
+                'src' => P_DEV_ASSETS . '/css/admin.css',
+                'version' => filemtime(P_DEV_PATH . '/assets/css/admin.css')
             ]
         ];
     }
@@ -54,7 +58,6 @@ class Assets{
         $scripts = $this->get_scripts();
         foreach($scripts as $handle => $script){
             $deps = isset($script['deps']) ? $script['deps'] : false;
-            var_dump($script);
             wp_register_script(
                 $handle, 
                 $script['src'], 
@@ -74,6 +77,6 @@ class Assets{
                 $style['version']
             );
         }
-        die;       
+
     }
 }
