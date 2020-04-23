@@ -67,6 +67,10 @@ final class Plugin_Development{
      */
     public function init_plugin(){
         new Plugin\Dev\Assets();
+
+        if(defined('DOING_AJAX') && DOING_AJAX){
+            new Plugin\Dev\Ajax();
+        }
         
         if(is_admin()){
             new Plugin\Dev\Admin();

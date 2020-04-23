@@ -22,7 +22,7 @@ class Enquiry{
      */
     public function render_shortcode($atts, $content = ''){
         wp_enqueue_script('plugin-dev-enquiry-script');
-        wp_enqueue_script('plugin-dev-enquiry-style');
+        wp_enqueue_style('plugin-dev-enquiry-style');
 
         ob_start();
         include __DIR__ . '/views/enquiry.php';
