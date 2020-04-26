@@ -99,16 +99,24 @@ class AddressList extends \WP_List_Table{
             __('Edit', 'plugin-dev'),
             __('Edit', 'plugin-dev')
         );
-        $actions['delete'] = sprintf(
+        // first way
+        /*$actions['delete'] = sprintf(
             '<a href="%s" class="submitdelete" onclick="return confirm(\'Are you sure?\');" title="%s">%s</a>',
             wp_nonce_url(
                 admin_url('admin-post.php?page=plugin-dev&action=wd-pd-delete-address&id=' . $item->id),
                 'wd-pd-delete-address'
             ),
-            // $item->id,
             __('Delete', 'plugin-dev'),
             __('Delete', 'plugin-dev')
-        ); 
+        );*/
+
+        // ajax way
+        $actions['delete'] = sprintf(
+            '<a href="#" class="submitdelete" data-id="%s">%s</a>',
+            $item->id,
+            __('Delete', 'plugin-dev')
+        );
+        
 
         return sprintf(
             '<a href="%1$s"><strong>%2$s</strong></a> %3$s',

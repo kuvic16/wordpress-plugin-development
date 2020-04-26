@@ -62,6 +62,7 @@ class Menu{
      */
     public function enqueue_admin_assets(){
         wp_enqueue_style('plugin-dev-admin-style');
+        wp_enqueue_script('plugin-dev-admin-script');
     }
 
     /**

@@ -36,7 +36,7 @@ class Assets{
             'plugin-dev-admin-script' => [
                 'src' => P_DEV_ASSETS . '/js/admin.js',
                 'version' => filemtime(P_DEV_PATH . '/assets/js/admin.js'),
-                'deps' => ['jquery']
+                'deps' => ['jquery', 'wp-util']
             ]
         ];
     }
@@ -94,6 +94,12 @@ class Assets{
 
         wp_localize_script('plugin-dev-enquiry-script', 'pluginDev',[
             'ajaxurl' => admin_url('admin-ajax.php'),
+            'error' => __('Something went wrong', 'plugin-dev')
+        ]);
+
+        wp_localize_script('plugin-dev-admin-script', 'pluginDev',[
+            'nonce' => wp_create_nonce('wd-pd-admin-nonce'),
+            'confirm' => __('Are you sure?', 'plugin-dev'),
             'error' => __('Something went wrong', 'plugin-dev')
         ]);
 
